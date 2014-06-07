@@ -5,6 +5,7 @@ http = require('http'),//helps with http methods
 path = require('path'),//helps with file paths
 fs = require('fs');//helps with file system tasks
 send = require('./sendmessage');
+receive = require('./receivemessage');
  
 //a helper function to handle HTTP requests
 function requestHandler(req, res) {
@@ -36,6 +37,10 @@ function requestHandler(req, res) {
     } 
 	else if (fileName === 'sendmessage.js'){
 			send.sendmessage();
+	}
+	else if (filename === 'receivemessage.js')
+	{
+		receive.receivemessage(req, res);
 	}
 	
 	else {

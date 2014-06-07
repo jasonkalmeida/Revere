@@ -7,7 +7,7 @@ exports.receivemessage = function(req, res) {
 	res.end("<Response></Response>");
 	
 	
-	
+
 	
 	
 }
