@@ -20,6 +20,24 @@ function sendAjax() {
 		alert(data);
 	});
 }
+
+
+function parser(){
+	//input a string called message
+	var message document.getElementById("message").value
+	//splits message into an array, with semi-colon as separator
+	var split_message = message.split(';');
+	//define location into a unique var
+	var message_location = split_message[0];
+	//define content into a unique var
+	var message_content = split_message[1];
+	
+	console.log("location = " + message_location);
+	console.log("content = " + message_content);
+	
+	
+}
+
 </script>
 
 </head>
@@ -30,6 +48,14 @@ function sendAjax() {
 
 <input name="button" type ="submit" value="send message"
 	onClick="sendAjax()">
+	
+
+<h2>messager</h2>
+<br>
+type message <input id="message" name="message" type="text">
+<br /><br />
+<input name="myBtn" type ="submit" value="Submit Data" onClick=parser(); >
+<br /><br />
 
 
 </body>
