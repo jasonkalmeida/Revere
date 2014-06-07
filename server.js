@@ -6,6 +6,9 @@ path = require('path'),//helps with file paths
 fs = require('fs');//helps with file system tasks
 send = require('./sendmessage');
 receive = require('./receivemessage');
+parse = require('./parsemessage');
+
+var to = '+19253361687'; // our actual subscribed number
 
 //a helper function to handle HTTP requests
 function requestHandler(req, res) {
@@ -36,13 +39,18 @@ function requestHandler(req, res) {
         });
     }
 	else if (fileName === 'sendmessage.js'){
-            var to = '+19253361687';
             var body = 'ur booty don need explainin';
 			send.sendmessage(to, body);
 	}
 	else if (fileName === 'receivemessage.js')
 	{
-		receive.receivemessage(req, res);
+		var sms = receive.receivemessage(req, res);
+        var parsed = parse.parsemessage(sms.Body);
+        var from = sms.From; // non-twilio number
+        var location = parsed.location;
+        var content = parsed.content;
+        console.log("sms from " + from + " location: " + location + " content: " + content);
+        send.sendmessage(to, content); // in fact, iterate over all stored numbers and choose according to location
 	}
 
 	else {

@@ -1,6 +1,7 @@
 exports.receivemessage = function(req, res) {
 
 	var data;
+	var obj = null;
 
 	 if (req.method == 'POST') {
 		console.log("[200] " + req.method + " to " + req.url);
@@ -8,7 +9,7 @@ exports.receivemessage = function(req, res) {
 		req.on('data', function(chunk) {
 			console.log("Received body data:");
 			data = chunk.toString();
-		    var obj = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\+/g,' ').replace(/%2B/g,'') + '"}');
+		    obj = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\+/g,' ').replace(/%2B/g,'') + '"}');
 			console.log(obj);
 			console.log(obj.Body);
 			console.log(obj.From);
@@ -24,10 +25,6 @@ exports.receivemessage = function(req, res) {
 		res.writeHead(405, "Method not supported", {'Content-Type': 'text/html'});
 		res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
 	}
-	
 
-	
-	
-	
-	
+	return obj;
 }
