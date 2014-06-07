@@ -59,7 +59,8 @@ function requestHandler(req, res) {
             var content = parsed.content;
             console.log("sms from " + from + " location: " + location + " content: " + content);
 
-            for (var record in database) {
+            for (var i in database) {
+                var record = database[i];
                 if (record.location == location) {
                     send.sendmessage(record.number, content);
                 }
