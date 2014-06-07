@@ -1,4 +1,4 @@
-exports.parsemessage = function(message){
+exports.parsemessage = function(message) {
 	//input a string called message
 
 	//splits message into an array, with semi-colon as separator

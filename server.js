@@ -8,7 +8,17 @@ send = require('./sendmessage');
 receive = require('./receivemessage');
 parse = require('./parsemessage');
 
-var to = '+19253361687'; // our actual subscribed number
+// our actual subscribed numbers
+var database = [
+    {
+        'location': 'Palo Alto',
+        'number': '+19253361687',
+    },
+    {
+        'location': 'Menlo Park',
+        'number': '+19253992505', //'+15102892801',
+    }
+];
 
 //a helper function to handle HTTP requests
 function requestHandler(req, res) {
@@ -20,14 +30,14 @@ function requestHandler(req, res) {
     //NOTE: __dirname returns the root folder that
     //this javascript file is in.
 
-    if(fileName === "/" || fileName === 'index.html'){//if index.html was requested...
+    if(fileName === "/" || fileName === 'index.html') {//if index.html was requested...
         content = localFolder + fileName;//setup the file name to be returned
 
         //reads the file referenced by 'content'
         //and then calls the anonymous function we pass in
-        fs.readFile(content,function(err,contents){
+        fs.readFile(content,function(err,contents) {
             //if the fileRead was successful...
-            if(!err){
+            if(!err) {
                 //send the contents of index.html
                 //and then close the request
                 res.end(contents);
@@ -37,25 +47,26 @@ function requestHandler(req, res) {
                 console.dir(err);
             };
         });
-    }
-	else if (fileName === 'sendmessage.js'){
-            var body = 'ur booty don need explainin';
-			send.sendmessage(to, body);
-	}
-	else if (fileName === 'receivemessage.js')
-	{
+    } else if (fileName === 'sendmessage.js') {
+        var to = '+19253361687';
+        var body = 'ur booty don need explainin';
+		send.sendmessage(to, body);
+	} else if (fileName === 'receivemessage.js') {
 		var parseAndSend = function(sms) {
             var parsed = parse.parsemessage(sms.Body);
             var from = sms.From; // non-twilio number
             var location = parsed.location;
             var content = parsed.content;
             console.log("sms from " + from + " location: " + location + " content: " + content);
-            send.sendmessage(to, content); // in fact, iterate over all stored numbers and choose according to location
-        }
-        receive.receivemessage(req, res, parseAndSend);
-	}
 
-	else {
+            for (var record in database) {
+                if (record.location == location) {
+                    send.sendmessage(record.number, content);
+                }
+            }
+        };
+        receive.receivemessage(req, res, parseAndSend);
+	} else {
         //if the file was not found, set a 404 header...
         res.writeHead(404, {'Content-Type': 'text/html'});
         //send a custom 'file not found' message
@@ -64,8 +75,4 @@ function requestHandler(req, res) {
     };
 };
 
-//step 2) create the server
-http.createServer(requestHandler)
-
-//step 3) listen for an HTTP request on port 8000
-.listen(8000);
+http.createServer(requestHandler).listen(8000);
