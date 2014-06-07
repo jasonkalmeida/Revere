@@ -1,63 +1,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Revere | Atrocity Watch</title>
-<link rel="icon" href="horse.ico" type="image/x-icon"/>
-<link rel="shortcut icon" href="horse.ico" type="image/x-icon"/>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" href="horse.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="horse.ico" type="image/x-icon"/>
 
-<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
-<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Karla' rel='stylesheet' type='text/css'>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<!-- ><script type="text/javascript" src="main.js"></script>-->
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <link href="http://fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Karla" rel="stylesheet" type="text/css">
 
-<script>
-function sendAjax() {
-	$.ajax({
-		"url": 'http://107.170.222.30:8000/sendmessage.js',
-	}).done(function(data) {
-		alert(data);
-	});
-}
+        <title>Revere | Atrocity Watch</title>
 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-function parser(){
-	//input a string called message
-	var message document.getElementById("message").value
-	//splits message into an array, with semi-colon as separator
-	var split_message = message.split(';');
-	//define location into a unique var
-	var message_location = split_message[0];
-	//define content into a unique var
-	var message_content = split_message[1];
-	
-	console.log("location = " + message_location);
-	console.log("content = " + message_content);
-	
-	
-}
+        <script>
+            function sendAjax() {
+                $.ajax({
+                    "url": "sendmessage.js",
+                }).done(function(data) {
+                    alert(data);
+                });
+            }
+        </script>
+    </head>
 
-</script>
+    <body>
+        <input name="button" type="submit" value="send message" onclick="sendAjax()">
 
-</head>
+        <h2>
+            messager
+        </h2>
 
-
-
-<body>
-
-<input name="button" type ="submit" value="send message"
-	onClick="sendAjax()">
-	
-
-<h2>messager</h2>
-<br>
-type message <input id="message" name="message" type="text">
-<br /><br />
-<input name="myBtn" type ="submit" value="Submit Data" onClick=parser(); >
-<br /><br />
-
-
-</body>
-
+        type message: <input id="message" name="message" type="text">
+        <br /><br />
+        <input name="myBtn" type="submit" value="Submit Data" onclick="parser()">
+        <br /><br />
+    </body>
 </html>

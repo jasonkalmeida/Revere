@@ -1,81 +1,82 @@
+var http = require("http"),
+    path = require("path"),
+    fs = require("fs"),
+    send = require("./sendmessage"),
+    receive = require("./receivemessage"),
+    parse = require("./parsemessage"),
+    tweet = require("./tweetmessage");
 
-//step 1) require the modules we need
-var
-http = require('http'),//helps with http methods
-path = require('path'),//helps with file paths
-fs = require('fs');//helps with file system tasks
-send = require('./sendmessage');
-receive = require('./receivemessage');
-parse = require('./parsemessage');
-tweet = require('./tweetmessage');
+// our virtual twilio number
+var TWILIO_NUMBER = "+14155285877";
 
-// our actual subscribed numbers
+// our real, actual subscribed numbers
 var database = [
     {
-        'location': 'Palo Alto',
-        'number': '+19253361687',
+        "location": "Palo Alto",
+        "number": "+19253361687", // Aaron
     },
     {
-        'location': 'Menlo Park',
-        'number': '+19253992505', //'+15102892801',
+        "location": "Menlo Park",
+        "number": "+19253992505", // Jason
     }
+    // "+15102892801" <-- Rajan
 ];
 
-//a helper function to handle HTTP requests
+// a helper function to handle HTTP requests
 function requestHandler(req, res) {
-    var
-    content = '',
-    fileName = path.basename(req.url),//the file that was requested
-    localFolder = __dirname + '/';//where our public files are located
+    var content = "",
+        fileName = path.basename(req.url), // the file that was requested
+        localFolder = __dirname + "/"; // where our public files are located
 
-    //NOTE: __dirname returns the root folder that
-    //this javascript file is in.
+    // NOTE: __dirname returns the root folder that the current JS file is in.
 
-    if(fileName === "/" || fileName === 'index.html') {//if index.html was requested...
-        content = localFolder + fileName;//setup the file name to be returned
+    if (fileName === "" || fileName === "/" || fileName === "index.html") { // if index.html was requested...
+        content = localFolder + "index.html"; // setup the file name to be returned
 
-        //reads the file referenced by 'content'
-        //and then calls the anonymous function we pass in
-        fs.readFile(content,function(err,contents) {
-            //if the fileRead was successful...
-            if(!err) {
-                //send the contents of index.html
-                //and then close the request
+        // reads the file referenced by "content"
+        // and then calls the anonymous function we pass in
+        fs.readFile(content, function(error, contents) {
+            // if the file read was successful...
+            if (!error) {
+                // send the contents of index.html and close the request
                 res.end(contents);
             } else {
-                //otherwise, let us inspect the eror
-                //in the console
-                console.dir(err);
+                // otherwise, let us inspect the error in the console
+                console.log(error);
             };
         });
-    } else if (fileName === 'sendmessage.js') {
-        var to = '+19253361687';
-        var body = 'ur booty don need explainin';
-		send.sendmessage(to, body);
-	} else if (fileName === 'receivemessage.js') {
-		var parseAndSend = function(sms) {
-            var parsed = parse.parsemessage(sms.Body);
-            var from = sms.From; // non-twilio number
+    }
+    else if (fileName === "sendmessage.js") {
+        var to = "+19253361687"; // Aaron's number
+        var body = "ur booty don need explainin";
+        send.sendMessage(TWILIO_NUMBER, to, body);
+    }
+    else if (fileName === "receivemessage.js") {
+        var parseAndSend = function(sms) {
+            var parsed = parse.parseMessage(sms.Body);
+            var fromNumber = sms.From; // non-twilio number
             var location = parsed.location;
             var content = parsed.content;
-            console.log("sms from " + from + " location: " + location + " content: " + content);
+            console.log("SMS from " + fromNumber + " location: " + location + " content: " + content);
 
             for (var i in database) {
                 var record = database[i];
                 if (record.location == location) {
-                    send.sendmessage(record.number, content);
+                    send.sendMessage(TWILIO_NUMBER, record.number, content);
                 }
             }
 
-            tweet.tweet("For " + location + ": " + content);
+            tweet.tweetMessage("For " + location + ": " + content);
         };
-        receive.receivemessage(req, res, parseAndSend);
-	} else {
-        //if the file was not found, set a 404 header...
-        res.writeHead(404, {'Content-Type': 'text/html'});
-        //send a custom 'file not found' message
-        //and then close the request
-        res.end('<h1>Sorry, the page you are looking for cannot be found.</h1>');
+
+        receive.receiveMessage(req, res, parseAndSend);
+    }
+    else {
+        // if the file was not found, set a 404 header...
+        res.writeHead(404, {"Content-Type": "text/html"});
+        // send a custom "file not found" message
+        // and then close the request
+        res.end("<h1>Sorry, the page you are looking for cannot be found.</h1>");
     };
 };
 

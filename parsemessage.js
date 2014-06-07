@@ -1,20 +1,16 @@
-exports.parsemessage = function(message) {
-	//input a string called message
+exports.parseMessage = function(message) {
+    // splits message into an array, with semicolon as separator
+    var message_tokens = message.split(";");
+    var message_location = message_tokens[0].trim();
+    var message_content = message_tokens[1].trim();
 
-	//splits message into an array, with semi-colon as separator
-	var split_message = message.split(';');
-	//define location into a unique var
-	var message_location = split_message[0];
-	//define content into a unique var
-	var message_content = split_message[1];
+    console.log("location = " + message_location);
+    console.log("content = " + message_content);
 
-	console.log("location = " + message_location);
-	console.log("content = " + message_content);
-
-	return {
-		'location': message_location,
-		'content': message_content,
-	};
+    return {
+        "location": message_location,
+        "content": message_content,
+    };
 }
 
-// exports.parsemessage("mars;yo i'm on mars");
+// exports.parseMessage("mars;yo i'm on mars");
