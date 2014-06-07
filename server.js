@@ -44,13 +44,15 @@ function requestHandler(req, res) {
 	}
 	else if (fileName === 'receivemessage.js')
 	{
-		var sms = receive.receivemessage(req, res);
-        var parsed = parse.parsemessage(sms.Body);
-        var from = sms.From; // non-twilio number
-        var location = parsed.location;
-        var content = parsed.content;
-        console.log("sms from " + from + " location: " + location + " content: " + content);
-        send.sendmessage(to, content); // in fact, iterate over all stored numbers and choose according to location
+		var parseAndSend = function(sms) {
+            var parsed = parse.parsemessage(sms.Body);
+            var from = sms.From; // non-twilio number
+            var location = parsed.location;
+            var content = parsed.content;
+            console.log("sms from " + from + " location: " + location + " content: " + content);
+            send.sendmessage(to, content); // in fact, iterate over all stored numbers and choose according to location
+        }
+        receive.receivemessage(req, res, parseAndSend);
 	}
 
 	else {

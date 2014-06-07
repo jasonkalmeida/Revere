@@ -1,4 +1,4 @@
-exports.receivemessage = function(req, res) {
+exports.receivemessage = function(req, res, parseCallback) {
 
 	var data;
 	var obj = null;
@@ -13,6 +13,7 @@ exports.receivemessage = function(req, res) {
 			console.log(obj);
 			console.log(obj.Body);
 			console.log(obj.From);
+			parseCallback(obj);
 		});
 
 		req.on('end', function() {
