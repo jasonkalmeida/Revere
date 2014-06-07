@@ -1,4 +1,18 @@
-var x = 'palo alto;pizza here';
-var partsArray = x.split(';');
-console.log(partsArray);
-console.log(partsArray[0]);
+function parser(message){
+	//input a string called message
+	
+	//splits message into an array, with semi-colon as separator
+	var split_message = message.split(';');
+	//define location into a unique var
+	var message_location = split_message[0];
+	//define content into a unique var
+	var message_content = split_message[1];
+	
+	console.log("location = " + message_location);
+	console.log("content = " + message_content);
+	
+	
+}
+
+parser("mars;yo i'm on mars");
+
