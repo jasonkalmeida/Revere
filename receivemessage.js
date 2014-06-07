@@ -1,5 +1,6 @@
 exports.receivemessage = function(req, res, parseCallback) {
 
+	var querystring = require('querystring');
 	var data;
 	var obj = null;
 
@@ -10,13 +11,13 @@ exports.receivemessage = function(req, res, parseCallback) {
 			console.log("Received body data:");
 			data = chunk.toString();
 		    obj = JSON.parse('{"' +
-				decodeURI(data)
+				querystring.unescape(data)
 				.replace(/"/g, '\\"')
 				.replace(/&/g, '","')
 				.replace(/=/g, '":"')
-				.replace(/\+/g, ' ')
-				.replace(/%2B/g, '')
-				.replace(/%3B/g, ';')
+				// .replace(/\+/g, ' ')
+				// .replace(/%2B/g, '')
+				// .replace(/%3B/g, ';')
 				+ '"}');
 			console.log(obj);
 			console.log(obj.Body);
