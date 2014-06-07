@@ -8,8 +8,8 @@ var client = new twilio.RestClient('AC3bb51f1222cd2ef879cb30d75d4643b2', '6917a6
 // Pass in parameters to the REST API using an object literal notation. The
 // REST client will handle authentication and response serialzation for you.
 client.sms.messages.create({
-    to:'+19253992505',
-    from:'Rever',
+    to:'+19253361687',
+    from:'+14155285877',
     body:'ur booty don need explainin'
 }, function(error, message) {
     // The HTTP request to Twilio will run asynchronously. This callback
@@ -27,5 +27,7 @@ client.sms.messages.create({
         console.log(message.dateCreated);
     } else {
         console.log('Oops! There was an error.');
+        console.log(error);
+		
     }
 });
