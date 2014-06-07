@@ -36,7 +36,9 @@ function requestHandler(req, res) {
         });
     }
 	else if (fileName === 'sendmessage.js'){
-			send.sendmessage();
+            var to = '+19253361687';
+            var body = 'ur booty don need explainin';
+			send.sendmessage(to, body);
 	}
 	else if (fileName === 'receivemessage.js')
 	{
