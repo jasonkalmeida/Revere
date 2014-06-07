@@ -38,7 +38,7 @@ function requestHandler(req, res) {
 	else if (fileName === 'sendmessage.js'){
 			send.sendmessage();
 	}
-	else if (filename === 'receivemessage.js')
+	else if (fileName === 'receivemessage.js')
 	{
 		receive.receivemessage(req, res);
 	}
