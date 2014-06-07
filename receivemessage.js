@@ -9,7 +9,15 @@ exports.receivemessage = function(req, res, parseCallback) {
 		req.on('data', function(chunk) {
 			console.log("Received body data:");
 			data = chunk.toString();
-		    obj = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\+/g,' ').replace(/%2B/g,'') + '"}');
+		    obj = JSON.parse('{"' +
+				decodeURI(data)
+				.replace(/"/g, '\\"')
+				.replace(/&/g, '","')
+				.replace(/=/g, '":"')
+				.replace(/\+/g, ' ')
+				.replace(/%2B/g, '')
+				.replace(/%3B/g, ';')
+				+ '"}');
 			console.log(obj);
 			console.log(obj.Body);
 			console.log(obj.From);
