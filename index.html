@@ -7,8 +7,18 @@
 <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
 <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Karla' rel='stylesheet' type='text/css'>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="main.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- ><script type="text/javascript" src="main.js"></script>-->
+
+<script>
+function sendAjax() {
+	$.ajax({
+		"url": 'http://localhost:8000/sendmessage.js',
+	}).done(function(data) {
+		alert(data);
+	});
+}
+</script>
 
 </head>
 
@@ -16,7 +26,8 @@
 
 <body>
 
-<input name="button" type ="submit" value="send message" onClick="main.js">
+<input name="button" type ="submit" value="send message" 
+	onClick="sendAjax()">
 
 	
 </body>
