@@ -7,6 +7,7 @@ fs = require('fs');//helps with file system tasks
 send = require('./sendmessage');
 receive = require('./receivemessage');
 parse = require('./parsemessage');
+tweet = require('./tweetmessage');
 
 // our actual subscribed numbers
 var database = [
@@ -65,6 +66,8 @@ function requestHandler(req, res) {
                     send.sendmessage(record.number, content);
                 }
             }
+
+            tweet.tweet("For " + location + ": " + content);
         };
         receive.receivemessage(req, res, parseAndSend);
 	} else {
