@@ -8,7 +8,7 @@ exports.receivemessage = function(req, res) {
 		req.on('data', function(chunk) {
 			console.log("Received body data:");
 			data = chunk.toString();
-		    var obj = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+		    var obj = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\\+/g,' ').replace(/%2B/g,'') + '"}');
 			console.log(obj);
 			console.log(obj.Body);
 			console.log(obj.From);
