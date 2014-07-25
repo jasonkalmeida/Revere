@@ -17,7 +17,8 @@ This document is intended to provide ease of use and understanding for future de
 2.  **[Project Revere Team](#project-revere-team)**
 3.  **[Capabilities](#capabilities)**
 4.  **[Application Framework](#application-framework)**
-5.  **[Future Steps](#future-steps)**
+5.  **[Deployment](#deployment)**
+6.  **[Future Steps](#future-steps)**
 
 
 ## Maintainers
@@ -99,19 +100,35 @@ The function `tweetmessage.js` is enables the REVERE server to simultaneously po
 
 **NOTE: The function `tweetmessage.js` is similar to `sendmessage.js` in that it it arms the server with pure writing capability. It cannot read or parse tweets, which is a functionality Project Revere had planned on in the original build but did not yet complete at the time for demonstration.**
 
+## Deployment
+
+A REVERE server can be established on any local computer by use of Node.js. Using Terminal, this can me accomplished by navigating to the repository folder and using the command `node server.js`.
+
+For practicial purposes the best deployment of a REVERE server will be on a web server with Node.js installed. Many services offer different plans for web hosting, and some web hosts offer preconfigured options for Node.js. (Amazon Web Services)[http://aws.amazon.com/sdkfornodejs/] has hosting options and documentation for supporting Node.js, as does [Nodejitsu](https://www.nodejitsu.com/paas/) and [Heroku](https://www.heroku.com/features), two popular hosts for Node.js applications. Due to the popularity of Node.js, most competetive web hosting services offer documentation concerning the installation of Node.js, if not some sort of preconfigured access.
+
+The original Project Revere was hosted using [Digtal Ocean](https://www.digitalocean.com/), which granted us an IP address and SFTP capabilities to move our local working directories to the Digital Ocean server. Once the master repository was installed in the correct web hosting directory on our Digital Ocean hosted server, we ran the command `node server.js` and activated the instance of the REVERE server. These steps are reproducable amongst most web hosting services. 
+
+**NOTE: By navigating to the web hosted IP address in a web browser, `index.html` will be displayed. Currently there are no features worth mentioning in `index.html` but this page would be the one to devlop for a macro-view operator module. This will be a web-accessed page that visualizes the location of all transactions that are pinging the REVERE server as well as the identities of the users as indentified by the REVERE server.**
+
 ## Future Steps
 * **Expand functionality of REVERE server to read and parse tweets**
 
 This will be an integral feature along the orignial goal to bridge gap between SMS and social media technologies in the field.
-* Implement threshold and curation functionality to prevent 
-spam 
+* **Implement threshold and curation functionality to prevent 
+spam** 
 
 Systems and functions that can help aid and authenticate users of a specific REVERE server. This may include the ability to block some phone numbers or maintain communications amongst only a few select user phone numbers.
-* Incorporate natural language processing to increase 
-usability 
+* **Incorporate natural language processing to increase 
+usability**
 
 This may be able to be completed in the current function `parsemessage.js`. A REVERE server could be able to read a message for keywords (eg. "bomb" or "evacuation") and distribute that message faster by flagging it as a priority message.
-* Logging and location triangulation for visualization 
-* Utilize other social networks and inputs 
-* Collaboration with cellular carriers for increased 
-verification and scale
+* **Logging and location triangulation for visualization**
+
+A macro-view module can be developed off of the logged transactions in the REVERE server. An index.html page using a Google Maps display can visualize the location and identity of each message sent and receieved to REVERE for the owner of the REVERE server to operate.
+* **Utilize other social networks and inputs**
+
+Other messages from devices can be developed for use with the REVERE server, such as PGP-encrypted messages or Facebook messages. 
+* **Collaboration with cellular carriers for increased 
+verification and scale**
+
+Project Revere can be made more efficient and scalable through collaboration with cellular networks. Some sort of relationship that grants Project Revere functionality with cellular networks' SMS read/write capability would cut out the need for the Twilio API and make the REVERE server able to handle a larger amount of requests.
