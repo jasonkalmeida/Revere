@@ -63,11 +63,11 @@ The files necessary to run a REVERE server are all in the same folder-level repo
 
 `REVERE SERVER - MASTER FOLDER  `
 
-`|- SERVER.JS`  
-`|- RECEIVEMESSAGE.JS`  
-`|- PARSEMESSAGE.JS`  
-`|- SENDMESSAGE.JS`  
-`|- TWEETMESSAGE.JS`  
+`|- SERVER.JS  
+|- RECEIVEMESSAGE.JS  
+|- PARSEMESSAGE.JS  
+|- SENDMESSAGE.JS  
+|- TWEETMESSAGE.JS`  
 
 
 **NOTE: This document will continue to describe functions that may not be reproducable without the installation of Node.js. To test and deploy the following functions, make sure Node.js is installed.**
