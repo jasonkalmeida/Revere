@@ -4,8 +4,8 @@ exports.sendMessage = function(from, to, body) {
     // Create a new REST API client to make authenticated requests against the
     // twilio back end
     var client = new twilio.RestClient(
-        "AC3bb51f1222cd2ef879cb30d75d4643b2",
-        "6917a691a6802ae837ed7fb92b5d9388");
+        "[INSERT API KEY 1]",
+        "[INSERT API KEY 2]");
 
     // Pass in parameters to the REST API using an object literal notation. The
     // REST client will handle authentication and response serialization for you.

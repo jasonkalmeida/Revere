@@ -3,10 +3,10 @@ var Twit = require("twit");
 exports.tweetMessage = function(message) {
     // Aaron's account
     var T = new Twit({
-        consumer_key:         "wRvmt950Jqcxl32tHCibEkHiV"
-      , consumer_secret:      "wz4PoP4N792SanN5EB1QKbUoGRCATPy1IyxMEoQjy0nfRnpKdC"
-      , access_token:         "17769002-pZwjDYScQw7mRSj4jWAWTqI3vCO4atvGQpczMeV9G"
-      , access_token_secret:  "bcc4rLun4Zgh6vwvnlPkvgSIGfYMII6HbLlgMoNPBuBYB"
+        consumer_key:         "[INSERT AN CONSUMER KEY]"
+      , consumer_secret:      "[INSERT CONSUMER SECRET CODE]"
+      , access_token:         "[INSERT ACCESS TOKEN]"
+      , access_token_secret:  "[INSERT TOKEN SECRET]"
     })
 
     // Revere's account

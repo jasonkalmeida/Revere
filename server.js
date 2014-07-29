@@ -7,19 +7,18 @@ var http = require("http"),
     tweet = require("./tweetmessage");
 
 // our virtual twilio number
-var TWILIO_NUMBER = "+14155285877";
+var TWILIO_NUMBER = "+[INSERT YOUR ASSIGNED TWILIO NUMBER]";
 
 // our real, actual subscribed numbers
 var database = [
     {
         "location": "Palo Alto",
-        "number": "+19253361687", // Aaron
+        "number": "+10001110000", // userX INSERT PHONE NUMBER
     },
     {
         "location": "Menlo Park",
-        "number": "+19253992505", // Jason
+        "number": "+01110001111", // userY INSERT PHONE NUMBER
     }
-    // "+15102892801" <-- Rajan
 ];
 
 // a helper function to handle HTTP requests
@@ -47,7 +46,7 @@ function requestHandler(req, res) {
         });
     }
     else if (fileName === "sendmessage.js") {
-        var to = "+19253361687"; // Aaron's number
+        var to = "+10001110000"; // userX's number
         var body = "ur booty don need explainin";
         send.sendMessage(TWILIO_NUMBER, to, body);
     }
